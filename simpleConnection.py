@@ -7,7 +7,9 @@ net_connect = Netmiko(
     username="pyclass",
     password=getpass(),
     device_type="cisco_ios",
+
 )
 
+#test
 print(net_connect.find_prompt())
 net_connect.disconnect()
