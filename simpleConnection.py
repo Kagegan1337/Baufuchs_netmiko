@@ -10,6 +10,6 @@ net_connect = Netmiko(
 
 )
 
-#test
+#tests
 print(net_connect.find_prompt())
-net_connect.disconnect()
+net_connect.disconnect
