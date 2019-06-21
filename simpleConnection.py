@@ -8,6 +8,6 @@ net_connect = Netmiko(
     password=getpass(),
     device_type="cisco_ios",
 )
-
+#oeki did asomething
 print(net_connect.find_prompt())
 net_connect.disconnect()
