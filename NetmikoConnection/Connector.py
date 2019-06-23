@@ -1,12 +1,12 @@
 from netmiko import ConnectHandler
-from Constants import ConnectionConstants
+from Constants.ConnectionConstants import ConnectionConstants
 
 
 class Connector:
     def __init__(self, username, password):
         self.connection_params = {
-            'device_type': ConnectionConstants.DEVICE_TYPE,
-            'host': ConnectionConstants.HOSTNAME,
+            'device_type': ConnectionConstants.DEVICE_TYPE.value,
+            'host': ConnectionConstants.HOSTNAME.value,
             'username': username,
             'password': password,
         }

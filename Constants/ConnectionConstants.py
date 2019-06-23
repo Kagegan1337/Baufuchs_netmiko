@@ -1,4 +1,7 @@
+from enum import Enum
 
-DEVICE_TYPE = 'cisco_ios'
 
-HOSTNAME = 'baufuchsnetmiko.de'
+class ConnectionConstants(Enum):
+
+    DEVICE_TYPE = 'cisco_ios'
+    HOSTNAME = 'baufuchsnetmiko.de'
