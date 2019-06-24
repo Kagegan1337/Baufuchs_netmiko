@@ -10,8 +10,19 @@ class Connector:
             'username': username,
             'password': password,
         }
-        #self.net_connect = ConnectHandler(**self.connection_params)
 
     def establish_connection(self):
-        print(self.connection_params.values())
+        try:
+            self.net_connect = ConnectHandler(**self.connection_params)
+            return True
+        except:
+            return False
+
+    def show_all_interfaces(self):
+        try:
+            list = self.net_connect.send_command("show ip interface brief").split("\n")
+            return list
+        except:
+            return None
+
 
