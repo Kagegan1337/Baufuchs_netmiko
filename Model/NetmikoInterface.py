@@ -10,7 +10,7 @@ Vlan1                  unassigned      YES unset  up                    down
 """
 
 
-class NetmikoPort:
+class NetmikoInterface:
 
     def __init__(self, name, ip_address, health, method, status, protocol):
         self.name = name

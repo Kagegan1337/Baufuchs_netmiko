@@ -8,7 +8,7 @@ GigabitEthernet0/1/2   unassigned      YES unset  down                  down
 GigabitEthernet0/1/3   unassigned      YES unset  down                  down
 Vlan1                  unassigned      YES unset  up                    down
 """
-from Model.NetmikoPort import NetmikoPort
+from Model.NetmikoInterface import NetmikoInterface
 
 
 class Parser:
@@ -17,4 +17,4 @@ class Parser:
     def parse_port(port):
         port = port.split(" ")
         port = [x for x in port if not x == '']
-        return NetmikoPort(port[0], port[1], port[2], port[3], port[4], port[5])
+        return NetmikoInterface(port[0], port[1], port[2], port[3], port[4], port[5])
