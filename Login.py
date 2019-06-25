@@ -1,4 +1,5 @@
 from tkinter import *
+import os
 
 
 # Create window
@@ -29,15 +30,19 @@ usernameEntry.pack(side=RIGHT)
 
 
 # Password
-passwordLabel = Label(passwordFrame, text="Username")
+passwordLabel = Label(passwordFrame, text="Password")
 passwordLabel.pack(side=LEFT)
 
 passwordEntry = Entry(passwordFrame, width=15)
 passwordEntry.pack(side=RIGHT)
 
+def switchWindow() :
+    window.destroy()
+    os.system('python NewVlan.py')
+
 
 # Buttons
-btn = Button(buttonFrame, text="Login").pack(side=LEFT)
+btn = Button(buttonFrame, text="Login",command=switchWindow).pack(side=LEFT)
 # btn = Button(buttonFrame, text="Cancel").pack(side=RIGHT)
 
 
