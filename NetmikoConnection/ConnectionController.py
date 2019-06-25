@@ -21,18 +21,17 @@ class ConnectionController:
         except:
             return False
 
-    def show_all_interfaces(self):
+    def get_all_interfaces(self):
         try:
-            return self.net_connect.send_command(CommandList.SHOW_INTERFACE).split("\n")
+            return self.net_connect.send_command(CommandList.SHOW_IMPORTANT.value).split("\n")
         except:
             return None
 
     def show_interface(self, netmiko_interface):
-        print(CommandList.SHOW_INTERFACE.value + " " + netmiko_interface.get_name())
-        self.net_connect.send_command(CommandList.SHOW_INTERFACE.value + " " + netmiko_interface.get_name())
+        return self.net_connect.send_command(CommandList.SHOW_INTERFACE.value + " " + netmiko_interface.get_name())
 
     def show_current_config(self, netmiko_interface):
-        self.net_connect.send_command("show running-config interface " + netmiko_interface.get_name())
+        return self.net_connect.send_command("show running-config interface " + netmiko_interface.get_name())
 
     def send_config(self, config):
         self.net_connect.send_config_set(config)
@@ -42,10 +41,32 @@ class ConnectionController:
 
     def get_version(self):
         # parse
-        self.net_connect.send_command(CommandList.SHOW_VERSION.value)
-        return -1
+        return self.net_connect.send_command(CommandList.SHOW_VERSION.value)
 
-    def get_uptime(self):
-        # parse
-        self.net_connect.send_command(CommandList.UPTIME.value)
-        return -1
+
+    def create_vlan(self, number):
+        config_command = ['vlan ' + str(number), 'jokap vlan ' + str(number)]
+        self.net_connect.send_config_set(config_command)
+
+    def delete_vlan(self, number):
+        config_command = ['no vlan ' + str(number)]
+        self.net_connect.send_config_set(config_command)
+
+    def show_vlan(self):
+        return self.net_connect.send_command(CommandList.SHOW_VLAN.value)
+
+    def change_vlan(self, interface, vlan):
+        config_command = ['int ' + interface.get_name(), 'switchport mode access',
+                          'switchport access vlan ' + str(vlan)]
+        return self.net_connect.send_config_set(config_command)
+
+    def port_toggle_status(self, interface):
+        config_command = ['interface ' + interface.get_name()]
+        if interface.get_status() == 'down':
+            config_command.append('no shutdown')
+        else:
+            config_command.append('shutdown')
+        self.net_connect.send_config_set(config_command)
+
+    def port_get_stauts(self, port):
+        return self.net_connect.send_command(CommandList.SHOW_INTERFACE.value + " " + port.get_name() + " status")

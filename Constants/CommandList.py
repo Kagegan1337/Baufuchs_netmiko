@@ -15,3 +15,6 @@ class CommandList(Enum):
     SHOW_IMPORTANT = 'show ip interface brief'
 
     UPTIME = 'in uptime'
+
+    SHOW_VLAN = 'show vlan'
+
